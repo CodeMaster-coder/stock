@@ -1,0 +1,6 @@
+<view class="firstleftcontent">
+<input type="text" placeholder="盐湖提锂" class="name" bindinput="inputstockname" value="{{chosenname}}" />
+</view>
+<view class="stocknameoptions"  >
+<view class="stockname" wx:for="{{chosennamelist}}"  wx:key="index" bindtap="includenamelist" data-index="{{index}}">{{item}}</view>
+</view>

@@ -1,0 +1,293 @@
+/* pages/strategyTest/strategyTest.wxss */
+.titlebox{
+  width: 100%;
+  height: 294rpx;
+  background-color: #FF6347;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 9;
+}
+.firsttitle{
+  margin-top: 54rpx;
+  font-size: 56rpx;
+  color: #fff;
+}
+.firstnote{
+  margin-top: 22rpx;
+  width: 394rpx;
+  height: 48rpx;
+  text-align: center;
+  border: 1rpx solid#BBBBBB;
+  border-radius: 48rpx;
+  background-color: #EE451C;
+}
+.firstnotetext{
+  line-height: 48rpx;
+  font-size: 28rpx;
+  color: #fff;
+}
+.optionsbox{
+  width: 100%;
+  margin-top: -46rpx;
+  display: flex;
+  justify-content: center;
+}
+.optionscontent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 700rpx;
+  height:auto;
+  border: 1rpx solid #BBBBBB;
+  border-radius: 30rpx;
+  z-index:99;
+  background-color: #FFFFFF;
+}
+.firstlineoptions{
+  display: flex;
+  flex-direction: row;
+  width: 660rpx;
+  height: 124rpx;
+  border-bottom: 1rpx solid #BBBBBB;
+}
+.leftfirstlineoptions{
+  width: 50%;
+  height: 124rpx;
+  display: flex; 
+  flex-direction: column;
+  align-items: center;
+/* justify-content: center; */
+}
+
+.firstlefttitle{
+  font-size: 28rpx;
+  margin-top: 18rpx;
+}
+.firstleftcontent{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  /* justify-content: center; */
+  margin-top: 8rpx;
+}
+.firstlastlineoptions{
+  display: flex;
+  flex-direction: row;
+  width: 660rpx;
+  height: 124rpx;
+}
+
+.stocknameoptions{
+  /* display: flex;  */
+  position: absolute;
+  height: 480rpx;
+  margin-top: 124rpx;
+  flex-direction: column;
+  width: 200rpx;
+  /* height: auto; */
+  background-color: #FBFAFA;
+  z-index: 99999999;
+  text-align: center;
+  overflow:scroll;
+  border: 1rpx solid #BBBBBB;
+  border-radius: 20rpx;
+  /* white-space:nowrap; */
+}
+.stockname{
+  /* display:inline-block; */
+  width: 100%;
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+
+.purchaseleftcontent{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  /* align-items: center; */
+  /* justify-content: center; */
+  margin-top: 18rpx;
+}
+.purchaseleftcontent input{
+  width: 60rpx;
+  font-size: 28rpx;
+  border-bottom: 1rpx solid #BBBBBB;
+}
+.purchaseleftcontent text{
+  position: absolute;
+  margin-left: 60rpx;
+  z-index: 9;
+  font-size: 28rpx;
+}
+.initialFundContent{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  /* justify-content: center; */
+  margin-top: 8rpx;
+}
+.initialFundContent text{
+  position: absolute;
+  margin-left: 210rpx;
+  z-index: 9;
+}
+.initialFundContent input{
+  width: 200rpx;
+  border-bottom: 1rpx solid #BBBBBB;
+}
+.detectFrequencyContent{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  align-items: center;
+  /* justify-content: center; */
+  margin-top: 8rpx;
+}
+.detectFrequencyContent text{
+  position: absolute;
+  margin-left: 70rpx;
+  z-index: 9;
+}
+.detectFrequencyContent input{
+  width: 60rpx;
+  border-bottom: 1rpx solid #BBBBBB;
+}
+.strategyCheckedLine{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.strategyCheckedButton{
+  width: 590rpx;
+  height: 66rpx;
+  text-align: center;
+  background-color: #F45555 ;
+  line-height: 66rpx;
+  border: 1rpx solid #9CBBBBBB;
+  border-radius: 60rpx;
+  margin-top: 20rpx;
+  margin-bottom: 36rpx;
+  font-size: 40rpx;
+  color: #FBF9F9 ;
+}
+.resShowBox{
+  width: 100%;
+  margin-top: 23rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.resContentBox{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 700rpx;
+  height:auto;
+  border: 1rpx solid #BBBBBB;
+  border-radius: 30rpx;
+  z-index:99;
+  background-color: #FFFFFF;
+}
+.firstLineContent{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.tradelineoptions{
+  display: flex;
+  flex-direction: column;
+  width: 660rpx;
+  height: 190rpx;
+  border-bottom: 1rpx solid #BBBBBB;
+}
+.remarks{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 18rpx;
+}
+.remarksContent{
+  width: 630rpx;
+  color: #868181;
+}
+.longHoldLine{
+  display: flex;
+  flex-direction: row;
+  width: 660rpx;
+  height: 124rpx;
+}
+.strategynameoptions{
+    /* display: flex;  */
+    position: absolute;
+    /* height: 480rpx; */
+    margin-top: 124rpx;
+    flex-direction: column;
+    width: 200rpx;
+    height: auto;
+    background-color: #FBFAFA;
+    z-index: 99999999;
+    text-align: center;
+    overflow:scroll;
+    border: 1rpx solid #BBBBBB;
+    border-radius: 20rpx;
+    /* white-space:nowrap; */
+}
+.resMaskBox{
+  position: absolute;
+  width:700rpx;
+  height: 566rpx;
+  z-index: 9999999999;
+  /* background-color: red; */
+  border-radius: 30rpx;
+}
+.purline{
+  width: 50%;
+  height: 124rpx;
+  display: flex; 
+  flex-direction:column;
+  /* align-items: center; */
+  justify-content: center;
+}
+.purlineoptions{
+  width: 100%;
+  height: 62rpx;
+  display: flex; 
+  flex-direction: row;
+  /* align-items: center; */
+  justify-content: center;
+}
+.purshorttitle{
+  font-size: 28rpx;
+  margin-top: 18rpx;
+}
+.purlongtitle{
+  font-size: 28rpx;
+  /* margin-top: 8rpx; */
+}
+.purchaselongcontent{
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  /* align-items: center; */
+  /* justify-content: center; */
+  /* margin-top: 18rpx; */
+}
+.purchaselongcontent input{
+  width: 60rpx;
+  font-size: 28rpx;
+  border-bottom: 1rpx solid #BBBBBB;
+}
+.purchaselongcontent text{
+  position: absolute;
+  margin-left: 60rpx;
+  z-index: 9;
+  font-size: 28rpx;
+
+}

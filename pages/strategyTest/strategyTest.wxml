@@ -1,0 +1,298 @@
+<!--pages/strategyTest/strategyTest.wxml-->
+<!-- 标题框 -->
+<view class="titlebox">
+<view class="firsttitle">均线交易策略</view>
+<view class="firstnote">
+<text class="firstnotetext">量化交易&历史数据回测</text>
+</view>
+</view>
+<!-- 策略选择框 -->
+<view class="optionsbox">
+<view class="optionscontent">
+
+<view class="firstlineoptions">
+<view class="leftfirstlineoptions">
+<!-- <view class="maincontent"> -->
+<view class="firstlefttitle">
+  名称
+</view>
+<view class="firstleftcontent">
+<input type="text" placeholder="股票名称" class="name" bindinput="inputstockname" value="{{chosenname}}" />
+</view>
+<view class="stocknameoptions"  wx:if="{{stocknameshow}}">
+<view class="stockname" wx:for="{{chosennamelist}}" wx:key="index" bindtap="includenamelist" data-index="{{index}}">{{item}}</view>
+</view>
+<!-- </view> -->
+
+
+
+</view>
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  代码
+</view>
+<view class="firstleftcontent">
+<input type="number" placeholder="股票代码" bindinput="inputstockcode" value="{{chosencode}}" >
+</input>
+</view>
+<scroll-view class="stocknameoptions"   wx:if="{{stockcodeshow}}" scroll-y = 'true'>
+<view class="stockname" wx:for="{{chosencodelist}}" wx:key="index" bindtap="includecodelist" data-index="{{index}}">{{item}}</view>
+</scroll-view>
+</view>
+</view>
+
+<view class="firstlineoptions">
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  买入策略
+</view>
+<view class="firstleftcontent">
+<view style="color:{{font_color}};" bindtap="strategyoptions">{{chosenstrategy}}
+</view>
+</view>
+<view class="strategynameoptions"  wx:if="{{strategyoptionshow}}">
+<view class="stockname" wx:for="{{strategylist}}" wx:key="index" data-index="{{index}}" bindtap="chosenstategyname">{{item}}</view>
+</view>
+</view>
+<view class="leftfirstlineoptions" wx:if="{{!purchaseshortshow}}">
+  <view class="firstlefttitle">
+  策略详情
+</view>
+<view class="firstleftcontent">
+<view style="color:{{font_color}};" bindtap="strategyoptions">配置策略参数
+</view>
+</view>
+</view>
+<view class="purline" wx:if="{{purchaseshortshow}}">
+  <view class="purlineoptions" >
+<view class="purshorttitle">
+  短期均线
+</view>
+<view class="purchaseleftcontent">
+<input type="number"   maxlength="4" value="{{purchaseshorttime}}" bindblur="inputpurchaseshort">
+</input>
+<text>日</text>
+</view>
+</view>
+
+<view class="purlineoptions">
+  <view class="purlongtitle">
+  长期均线
+</view>
+<view class="purchaselongcontent">
+<input type="number"   maxlength="4" value="{{purchaselongtime}}" bindblur="inputpurchaselong">
+</input>
+<text>日</text>
+</view>
+</view>
+</view>
+
+</view>
+
+<view class="firstlineoptions">
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  卖出策略
+</view>
+<view class="firstleftcontent">
+  <view  style="color:{{soldfont_color}};" bindtap="soldstrategyoptions"> {{chosensoldstrategy}}
+</view>
+</view>
+<view class="strategynameoptions"  wx:if="{{strategysoldoptionshow}}">
+<view class="stockname" wx:for="{{strategylist}}" wx:key="index" data-index="{{index}}" bindtap="chosensoldstategyname">{{item}}</view>
+</view>
+</view>
+<view class="leftfirstlineoptions" wx:if="{{!soldshortshow}}">
+  <view class="firstlefttitle">
+  策略详情
+</view>
+<view class="firstleftcontent">
+<view style="color:{{font_color}};" bindtap="strategyoptions">配置策略参数
+</view>
+</view>
+</view>
+  <view class="purline" wx:if="{{soldshortshow}}">
+  <view class="purlineoptions" >
+<view class="purshorttitle">
+  短期均线
+</view>
+<view class="purchaseleftcontent">
+  <input type="number"   maxlength="4" value="{{soldshorttime}}" bindblur="inputshortlong">
+</input>
+<text>日</text>
+</view>
+</view>
+
+<view class="purlineoptions">
+  <view class="purlongtitle">
+  长期均线
+</view>
+<view class="purchaselongcontent">
+  <input type="number"   maxlength="4" value="{{soldlongtime}}" bindblur="inputsoldlong">
+</input>
+<text>日</text>
+</view>
+</view>
+</view>
+
+</view>
+
+
+<view class="firstlineoptions">
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  回测起始时间
+</view>
+<view class="firstleftcontent">
+  <picker mode="date"  bindchange="chosestarttime" start='1990-12-10' end='{{today}}'>
+<input type="text" placeholder="选择起始时间" value="{{testSartTime}}" disabled="true" >
+</input>
+</picker>
+</view>
+</view>
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  回测结束时间
+</view>
+<view class="firstleftcontent">
+  <picker mode="date"  bindchange="choseendtime" start='1990-12-10' end='{{today}}'>
+<input type="text" placeholder="选择结束时间" value="{{testEndTime}}" disabled="true" >
+</input>
+</picker>
+</view>
+</view>
+</view>
+
+<view class="firstlastlineoptions">
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  初始资金
+</view>
+<view class="initialFundContent">
+<input type="digit"  maxlength='9' value="{{initialFund}}" bindblur="inputInitialFund">
+</input>
+<text>元</text>
+</view>
+</view>
+<view class="leftfirstlineoptions">
+<view class="firstlefttitle">
+  交易检测周期
+</view>
+<view class="detectFrequencyContent">
+<input type="number"  maxlength='3'  value="{{detectFrequency}}" bindblur="inputDetectFrequency">
+</input>
+<text>日</text>
+</view>
+</view>
+</view>
+
+<view class="strategyCheckedLine">
+<view class="strategyCheckedButton" bindtap="strategyChecked">
+策略检验
+</view>
+</view>
+</view>
+
+
+</view>
+
+<!-- 策略结果框 -->
+<view class="resShowBox">
+<view class="resContentBox">
+  <view wx:if="{{loadingShow}}">
+    <loading >正在计算数据</loading>
+  </view>
+  
+  <view class="tradelineoptions">
+
+    <view class="firstLineContent">
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      交易次数
+      </view>
+      <view class="firstleftcontent">
+        {{tradeFreq}}
+      </view>
+    </view>
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      交易费用
+      </view>
+      <view class="firstleftcontent">
+        {{tradeCost}}
+      </view>
+    </view>
+  </view>
+  <view class="remarks">
+    <view class="remarksContent">
+    备注：以20日与50日均线为例，20日上穿50日，第二天开盘价买入,20
+    日下穿50日时卖出，此过程为一次交易。
+    </view>
+  </view>
+  </view>
+
+  <view class="firstlineoptions">
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      盈利次数
+      </view>
+      <view class="firstleftcontent">
+        {{winFreq}}
+      </view>
+    </view>
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      亏损次数
+      </view>
+      <view class="firstleftcontent">
+        {{loseFre}}
+      </view>
+    </view>
+  </view>
+
+  <view class="firstlineoptions">
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      结余资金
+      </view>
+      <view class="firstleftcontent">
+        {{leftFund}}
+      </view>
+    </view>
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      利润率
+      </view>
+      <view class="firstleftcontent">
+        {{profitRate}}
+      </view>
+    </view>
+  </view>
+
+  <view class="longHoldLine">
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+      长期持有剩余资金
+      </view>
+      <view class="firstleftcontent">
+        {{longHoldFund}}
+      </view>
+    </view>
+    <view class="leftfirstlineoptions">
+      <view class="firstlefttitle">
+        长期持有利润率
+      </view>
+      <view class="firstleftcontent">
+        {{longHoldRate}}
+      </view>
+    </view>
+  </view>
+
+  <view class="strategyCheckedLine">
+<view class="strategyCheckedButton" bindtap="strategyAdd">
+加入自选
+</view>
+</view>
+
+</view>
+</view>

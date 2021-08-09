@@ -1,0 +1,91 @@
+<!--pages/userPage/userPage.wxml-->
+<view wx:if="{{loadingShow}}">
+    <loading >正在计算交易信号</loading>
+  </view>
+<view class="titlebox">
+<view class="userbox">
+<view class="userImage">
+<image src="{{headImage}}"></image>
+</view>
+<view class="textbox">
+<view class="nickNameText">{{nickName}}</view>
+<view wx:if="{{loginBtnShow}}" class="loginBtn" bindtap="resgiOrLogin">登录/注册</view>
+<view wx:if="{{!loginBtnShow}}" class="exitBtn" bindtap="exit">退出</view>
+</view>
+</view>
+</view>
+
+<!-- 自选股票列表 -->
+<view class="selfStockTitle">
+自选股票
+</view>
+<view class="selfStockBox">
+<view class="selfStockList" wx:for="{{selfStockList}}" wx:key = 'unique' wx:for-index="index">
+<view class="stockCol">
+<view class="stockTitle">
+股票
+</view>
+<view class="nameCode">
+<view class="name">
+  {{item.st_name}}
+</view>
+<view class="code">
+  {{item.ts_code}}
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+买入策略
+</view>
+<view class="nameCode">
+<view class="name">
+  {{item.purchase_strategy}}
+</view>
+<view class="stretagyDetail">
+<view class="code">
+  {{item.pur_str_p1}}
+</view>
+<view class="detailcode">
+  {{item.pur_str_p2}}
+</view>
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+卖出策略
+</view>
+<view class="stretagyContent">
+<view class="name">
+  {{item.sell_strategy}}
+</view>
+<view class="stretagyDetail">
+<view class="code">
+  {{item.sell_str_p1}}
+</view>
+<view class="detailcode">
+  {{item.sell_str_p2}}
+</view>
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+交易信号
+</view>
+<view class="stretagySignal">
+<view class="tradeAction" style="color:{{item.trade_signal == '卖出'? tradeSignalColor1:tradeSignalColor}};">
+  {{item.trade_signal}}
+</view>
+</view>
+</view>
+
+<view class="navTriangle" data-index="{{index}}" bindtap="detailAndDelete">
+<image src='/image/箭 头 (1).png'></image>
+</view>
+</view>
+</view>

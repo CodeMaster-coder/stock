@@ -1,0 +1,27 @@
+
+.firstlastlineoptions{
+  display: flex;
+  flex-direction: row;
+  width: 660rpx;
+  height: 124rpx;
+}
+
+.stocknameoptions{
+  /* display: flex;  */
+  /* position: absolute; */
+  margin-top: 124rpx;
+  /* flex-direction: column; */
+  width: 200rpx;
+  height: 500rpx;
+  background-color: #FBFAFA;
+  z-index: 9999;
+  text-align: center;
+  /* overflow: visible; */
+  border: 1rpx solid #BBBBBB;
+  border-radius: 20rpx;
+}
+.stockname{
+  width: 100%;
+  height: auto;
+}
+

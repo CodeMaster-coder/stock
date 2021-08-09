@@ -1,0 +1,71 @@
+<!--pages/userPage/userPage.wxml-->
+<view class="titlebox">
+<view class="userbox">
+<view class="userImage">
+<image src="{{headImage}}"></image>
+</view>
+<view class="textbox">
+<view class="nickNameText">{{nickName}}</view>
+<view class="loginBtn" bindtap="resgiOrLogin">登录/注册</view>
+</view>
+</view>
+</view>
+
+<!-- 自选股票列表 -->
+<view class="selfStockTitle">
+自选股票
+</view>
+<view class="selfStockBox">
+<view class="selfStockList" wx:for="{{selfStockList}}" wx:key = 'unique'>
+<view class="stockCol">
+<view class="stockTitle">
+股票
+</view>
+<view class="nameCode">
+<view class="name">
+  {{item.stockName}}
+</view>
+<view class="code">
+  {{item.stockCode}}
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+买入策略
+</view>
+<view class="stretagyContent">
+<view class="name">
+  {{item.purchaseStretagy}}
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+卖出策略
+</view>
+<view class="stretagyContent">
+<view class="name">
+  {{item.soldStretagy}}
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+交易信号
+</view>
+<view class="stretagyContent">
+<view class="tradeAction">
+  {{item.tradeSignal}}
+</view>
+</view>
+</view>
+
+<view class="navTriangle">
+<image src='/image/箭 头 (1).png'></image>
+</view>
+</view>
+</view>
