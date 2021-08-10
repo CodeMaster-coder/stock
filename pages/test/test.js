@@ -5,97 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    headImage:'https://i.loli.net/2021/07/24/YMUpxJRHDNFEvkW.png',
-    nickName:'用户昵称',
-    selfStockList:[
-{stockName:'平安银行',stockCode:'000001.SZ',purchaseStretagy:'均线与均线',soldStretagy:'均线与均线',tradeSignal:'买入'},
-{stockName:'盐湖提锂',stockCode:'885992.SZ',purchaseStretagy:'均线与均线',soldStretagy:'MACD',tradeSignal:'卖出'},
-{stockName:'平安银行',stockCode:'000001.SZ',purchaseStretagy:'均线与均线',soldStretagy:'JKD',tradeSignal:'买入'},
-{stockName:'平安银行',stockCode:'000001.SZ',purchaseStretagy:'均线与均线',soldStretagy:'均线与均线',tradeSignal:'买入'},
-{stockName:'平安银行',stockCode:'000001.SZ',purchaseStretagy:'均线与均线',soldStretagy:'均线与均线',tradeSignal:'买入'},
-  ],
-  id_code:'',
+    choose_items:[
+      '推荐', '猜您喜欢', '热销爆款', '品质订制', '有机馆', '环球美食'
+      
+    ],
+    current_item: 0,
   },
-  resgiOrLogin(){
-    let that = this;
-    wx.getUserProfile({
-      desc: '用于完善客户信息',
-      success: function(res){
-        let user = res.userInfo;
-        let encryptedData = res.encryptedData;
-        let iv = res.iv;
-        wx.login({
-          success: function(res){
-            let code = res.code 
-            console.log(code)             
-            if(code){
-              wx.request({
-                url:'https://www.zqzqsmile.xyz/stockUserinfo/login',
-                method:'POST',
-                header:{'content-type': 'application/x-www-form-urlencoded'},
-                data:{
-                  demo:'checkstatus',
-                  code:code
-                },
-                success: function(res){
-                  // console.log(res.data[0])
-                  let userinfo = res.data
-                  console.log(userinfo)
-                  if(userinfo == 'noinfo'){
-                        wx.login({
-                          success: function(res){
-                            let code = res.code              
-                            if(code){
-                              wx.request({
-                                url: 'https://www.zqzqsmile.xyz/stockUserinfo/login',
-                                method:'POST',
-                                header:{'content-type': 'application/JSON'},
-                                data:{
-                                  code: code,
-                                  demo:'register',
-                                  encryptedData: encryptedData,
-                                  iv: iv,
-                                },
-                                success: function(res){
-                                  if(res.data.status == true){
-                                    wx.showToast({
-                                      title: '注册已完成',
-                                      icon: 'none',
-                                      duration: 1000
-                                    })
-                                  }
-                                }
-                              })
-                            }
-                            }})
-                  }
-                  else{
-                    console.log(res.data[0])
-                    let userinfo = res.data[0]
-                    wx.request({
-                      url: 'https://www.zqzqsmile.xyz/stock/login',
-                      method:'POST',
-                      header:{'content-type': 'application/JSON'},
-                      data:{
-                        code: 'user_stock_info',
-                        id_code:code
-                      },
-                      success: function(res){
-                        console.log(res.data)
-                      }
-                    })
-                 }
-                }
-              })
-            }
-      }
+/**
+ * 动态地给左侧导航栏添加点击变色样式
+ */
+ 
+  clicked:function(e){
+    var that= this;
+    let cuu=e.currentTarget.dataset.key;//获取index值
+    console.log(cuu);
+    that.setData({
+      current_item: cuu
     })
-      }
-    })
-
-
-},
-
+  },
   /**
    * 生命周期函数--监听页面加载
    */

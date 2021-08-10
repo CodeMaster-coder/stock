@@ -1,4 +1,8 @@
 /* pages/userPage/userPage.wxss */
+.biggestBox{
+  width: 100%;
+  height: 1000000rpx;
+}
 .titlebox{
   width: 100%;
   height: 294rpx;
@@ -53,6 +57,27 @@
   text-align: center;
   line-height: 40rpx;
 }
+.titleLine{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.refreshBox{
+  display: flex;
+  flex-direction: row;
+  margin-left: 500rpx;
+}
+.refreshImage{
+  margin-top: 10rpx;
+}
+.refreshImage image{
+  width: 25rpx;
+  height: 25rpx;
+}
+.refreshBtn{
+  font-size: 28rpx;
+  margin-top: 15rpx;
+}
 .selfStockTitle{
   font-size: 28rpx;
   margin-left: 26rpx;
@@ -61,19 +86,25 @@
 .selfStockBox{
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
 
   width: 100%;
   margin-top: 16rpx;
 }
+.selfStockListBox{
+  display: flex;
+  flex-direction: row;
+}
 .selfStockList{
   display: flex;
   flex-direction: row;
-  width: 710rpx;
+  width: 100%;
   border: 2rpx solid rgba(187, 187, 187, 100);
   height: 130rpx;
   border-radius: 20rpx;
   margin-top: 14rpx;
+  margin-left: 4rpx;
+  margin-right: 4rpx;
 }
 .stockCol{
   width: 24.25%;
@@ -144,4 +175,21 @@ justify-content: center;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+.delBtn{
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  height: 130rpx;
+  line-height: 130rpx;
+  width: 90rpx;
+  margin-right: 5rpx;
+  margin-left: 10rpx;
+  border: 2rpx solid rgba(187, 187, 187, 100);
+  border-radius: 20rpx;
+  margin-top: 14rpx;
+  background-color:  	 	#F5F5F5;
+}
+.delBtn1{
+  display: none;
 }

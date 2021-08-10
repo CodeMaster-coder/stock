@@ -2,7 +2,6 @@
   "pages":[
     "pages/strategyTest/strategyTest",
     "pages/userPage/userPage",
-
     "pages/test/test",
     "pages/index/index",
     "pages/logs/logs"

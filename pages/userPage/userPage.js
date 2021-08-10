@@ -12,7 +12,8 @@ Page({
   loginBtnShow:true,
   tradeSignalColor:'#FF6347',
   tradeSignalColor1:'#66cd7d',
-  loadingShow:false
+  loadingShow:false,
+  currentItem: null,
   },
   resgiOrLogin(){
     let that = this;
@@ -122,6 +123,110 @@ exit(){
   })
   wx.removeStorageSync('userinfo')
 },
+detailAndDelete(e){
+  var index = e.currentTarget.dataset.index;
+  // console.log("index: "+index)
+  this.setData({
+    currentItem:index
+  })
+  // console.log(this.data.currentItem)
+},
+btnHide(){
+  if(this.data.currentItem != null)
+  this.setData({
+    currentItem:''
+  })
+  // console.log(this.data.currentItem)
+},
+delStretagy(){
+  let that = this;
+  let id = that.data.currentItem;
+  let selfStockList = that.data.selfStockList;
+  let stockId = selfStockList[id].id;
+  wx.showModal({
+    title:'删除自选策略确认框',
+    content:'确定删除当前策略？',
+    success:function(res){
+      if(res.confirm){
+        wx.request({
+          url: 'https://www.zqzqsmile.xyz/stock/login',
+          data:{
+            code:'user_dele_stock_info',
+            id:stockId
+          },
+          method:'POST',
+          header: {
+           'content-type': 'application/json' // 默认值
+          },
+          success:function(res){
+            console.log(res.data)
+            if(res.data.info == '自选股票及策略删除成功'){
+              wx.showToast({
+                title: '策略删除完成',
+                icon: 'none',
+                duration: 2000
+              })
+              selfStockList.splice(id,1)
+              that.setData({
+                selfStockList:selfStockList
+              })
+            }
+            else{
+              wx.showToast({
+                title: '系统异常',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }
+        })
+      }
+    }
+  })
+},
+refreshBtn(){
+  let user = wx.getStorageSync('userinfo');
+  let that = this;
+  // console.log(user)
+  if(user == ''){
+    wx.showToast({
+      title: '请先登录/注册！',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  else{
+    that.setData({
+      loadingShow:true
+    })
+    wx.login({
+      success(res){
+        let id_code = res.code;
+        console.log(id_code)
+        if(id_code){
+          wx.request({
+            url: 'https://www.zqzqsmile.xyz/stock/login',
+            method:'POST',
+            header:{'content-type': 'application/JSON'},
+            data:{
+              code:'user_stock_info',
+              id_code:id_code
+            },
+            success: function(res){
+              console.log(res.data)
+              let selfStockList = res.data
+              that.setData({
+                selfStockList:selfStockList,
+                loadingShow:false
+              })
+            }
+          })
+        }
+      }
+    })
+  }
+},
+
 
   /**
    * 生命周期函数--监听页面加载
@@ -129,7 +234,7 @@ exit(){
   onLoad: function (options) {
     let user = wx.getStorageSync('userinfo');
     let that = this;
-    console.log(user)
+    // console.log(user)
     if(user == ''){
       that.setData({
         selfStockList:'',
@@ -170,10 +275,6 @@ exit(){
         }
       })
     }
-  },
-  detailAndDelete(e){
-    var index = e.currentTarget.dataset.index;
-    console.log("index: "+index)
   },
 
   /**

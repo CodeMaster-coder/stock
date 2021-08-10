@@ -2,6 +2,7 @@
 <view wx:if="{{loadingShow}}">
     <loading >正在计算交易信号</loading>
   </view>
+<view class="biggestBox" bindtap="btnHide">
 <view class="titlebox">
 <view class="userbox">
 <view class="userImage">
@@ -16,11 +17,22 @@
 </view>
 
 <!-- 自选股票列表 -->
+<view class="titleLine">
 <view class="selfStockTitle">
 自选股票
 </view>
+<view class="refreshBox" bindtap="refreshBtn">
+<view class="refreshImage">
+<image src="../images/refresh.png"></image>
+</view>
+<view class="refreshBtn">
+刷新
+</view>
+</view>
+</view>
 <view class="selfStockBox">
-<view class="selfStockList" wx:for="{{selfStockList}}" wx:key = 'unique' wx:for-index="index">
+<view class="selfStockListBox" wx:for="{{selfStockList}}" wx:key = 'unique' wx:for-index="index">
+<view class="selfStockList">
 <view class="stockCol">
 <view class="stockTitle">
 股票
@@ -84,8 +96,15 @@
 </view>
 </view>
 
-<view class="navTriangle" data-index="{{index}}" bindtap="detailAndDelete">
+<!-- <view class="{{currentItem === index? 'navTriangle1' : 'navTriangle'}}" data-index="{{index}}" bindtap="detailAndDelete"> -->
+<view class="navTriangle" data-index="{{index}}" catchtap="detailAndDelete">
 <image src='/image/箭 头 (1).png'></image>
+</view>
+</view>
+<view class="{{currentItem === index? 'delBtn' : 'delBtn1'}}" data-index="{{index}}"  bindtap="delStretagy">
+删除
+</view>
+
 </view>
 </view>
 </view>
