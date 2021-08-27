@@ -63,7 +63,7 @@ Page({
         stocklist.forEach(function(i) {
           let stockname = i.st_name
           let stockspell = i.cnspell
-          if (stockname.indexOf(value) >= 0 || stockspell.indexOf(value) >= 0 ) {
+            if (stockname.indexOf(value) >= 0 || stockspell.indexOf(value) >= 0 ) {
             namearr.push(stockname);
           }
         })
@@ -534,7 +534,7 @@ Page({
         that.setData({
           stocklist:stocklist
         })
-        // console.log(that.data.stocklist)
+        console.log(that.data.stocklist)
       }
       
     })

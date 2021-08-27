@@ -17,7 +17,7 @@
   名称
 </view>
 <view class="firstleftcontent">
-<input type="text" placeholder="股票名称" class="name" bindinput="inputstockname" value="{{chosenname}}" />
+<input type="text" placeholder="股票/基金" class="name" bindinput="inputstockname" value="{{chosenname}}" />
 </view>
 <view class="stocknameoptions"  wx:if="{{stocknameshow}}">
 <view class="stockname" wx:for="{{chosennamelist}}" wx:key="index" bindtap="includenamelist" data-index="{{index}}">{{item}}</view>
@@ -32,7 +32,7 @@
   代码
 </view>
 <view class="firstleftcontent">
-<input type="number" placeholder="股票代码" bindinput="inputstockcode" value="{{chosencode}}" >
+<input type="number" placeholder="股票/基金" bindinput="inputstockcode" value="{{chosencode}}" >
 </input>
 </view>
 <scroll-view class="stocknameoptions"   wx:if="{{stockcodeshow}}" scroll-y = 'true'>

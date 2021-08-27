@@ -85,7 +85,7 @@
   height: 480rpx;
   margin-top: 124rpx;
   flex-direction: column;
-  width: 200rpx;
+  width: 300rpx;
   /* height: auto; */
   background-color: #FBFAFA;
   z-index: 99999999;

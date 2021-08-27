@@ -14,6 +14,8 @@ Page({
   tradeSignalColor1:'#66cd7d',
   loadingShow:false,
   currentItem: null,
+  touchsx:'',
+  touchsy:'',
   },
   resgiOrLogin(){
     let that = this;
@@ -123,14 +125,6 @@ exit(){
   })
   wx.removeStorageSync('userinfo')
 },
-detailAndDelete(e){
-  var index = e.currentTarget.dataset.index;
-  // console.log("index: "+index)
-  this.setData({
-    currentItem:index
-  })
-  // console.log(this.data.currentItem)
-},
 btnHide(){
   if(this.data.currentItem != null)
   this.setData({
@@ -225,6 +219,29 @@ refreshBtn(){
       }
     })
   }
+},
+touchStart(e) {
+  let that = this;
+  that.setData({
+    touchsx: e.changedTouches[0].clientX,
+    // touchsy: e.changedTouches[0].clientY
+  });
+
+},
+touchEnd(e) {
+  console.log(e)
+  let that = this;
+  let index = e.currentTarget.dataset.index;
+  that.setData({
+    touchex: e.changedTouches[0].clientX,
+    // touchey: e.changedTouches[0].clientY
+  });
+  if(that.data.touchsx-that.data.touchex >= 50){
+    this.setData({
+      currentItem:index
+    })
+  }
+
 },
 
 

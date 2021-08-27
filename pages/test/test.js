@@ -5,29 +5,293 @@ Page({
    * 页面的初始数据
    */
   data: {
-    choose_items:[
-      '推荐', '猜您喜欢', '热销爆款', '品质订制', '有机馆', '环球美食'
-      
-    ],
-    current_item: 0,
+    headImage:'https://i.loli.net/2021/07/24/YMUpxJRHDNFEvkW.png',
+    nickName:'用户昵称',
+    selfStockList:[ ],
+  id_code:'',
+  loginBtnShow:true,
+  tradeSignalColor:'#FF6347',
+  tradeSignalColor1:'#66cd7d',
+  loadingShow:false,
+  currentItem: null,
+  touchsx:'',
+  touchsy:'',
   },
-/**
- * 动态地给左侧导航栏添加点击变色样式
- */
- 
-  clicked:function(e){
-    var that= this;
-    let cuu=e.currentTarget.dataset.key;//获取index值
-    console.log(cuu);
-    that.setData({
-      current_item: cuu
+  resgiOrLogin(){
+    let that = this;
+    wx.getUserProfile({
+      desc: '用于完善客户信息',
+      success: function(res){
+        // console.log(res)
+        let user = res.userInfo;
+        console.log(user)
+        that.setData({
+          headImage:user.avatarUrl,
+          nickName:user.nickName,
+          loginBtnShow:false,
+        })
+        let encryptedData = res.encryptedData;
+        let iv = res.iv;
+        wx.login({
+          success: function(res){
+            let code = res.code 
+            // console.log(code)             
+            if(code){
+              wx.request({
+                url:'https://www.zqzqsmile.xyz/stockUserinfo/login',
+                method:'POST',
+                header:{'content-type': 'application/x-www-form-urlencoded'},
+                data:{
+                  demo:'checkstatus',
+                  code:code
+                },
+                success: function(res){
+                  // console.log(res.data[0])
+                  let userinfo = res.data
+                  // console.log(userinfo)
+                  if(userinfo == 'noinfo'){
+                        wx.login({
+                          success: function(res){
+                            let code = res.code              
+                            if(code){
+                              wx.request({
+                                url: 'https://www.zqzqsmile.xyz/stockUserinfo/login',
+                                method:'POST',
+                                header:{'content-type': 'application/JSON'},
+                                data:{
+                                  code: code,
+                                  demo:'register',
+                                  encryptedData: encryptedData,
+                                  iv: iv,
+                                },
+                                success: function(res){
+                                  if(res.data.status == true){
+                                    wx.showToast({
+                                      title: '注册已完成',
+                                      icon: 'none',
+                                      duration: 1000
+                                    })
+                                    wx.setStorageSync('userinfo', user)
+                                  }
+                                }
+                              })
+                            }
+                            }})
+                  }
+                  else{
+                    console.log(res.data[0])
+                    let userinfo = res.data[0]
+                    wx.setStorageSync('userinfo', userinfo)
+                    that.setData({
+                      loadingShow:true
+                    })
+                    wx.login({
+                      success: function(res){
+                        let code = res.code 
+                        if(code){
+                    wx.request({
+                      url: 'https://www.zqzqsmile.xyz/stock/login',
+                      method:'POST',
+                      header:{'content-type': 'application/JSON'},
+                      data:{
+                        code: 'user_stock_info',
+                        id_code:code
+                      },
+                      success: function(res){
+                        console.log(res.data)
+                        let selfStockList = res.data
+                        that.setData({
+                          selfStockList:selfStockList,
+                          loadingShow:false
+                        })
+                      }
+                    })}}})
+                 }
+                }
+              })
+            }
+      }
     })
-  },
+      }
+    })
+},
+exit(){
+  let that =this
+  that.setData({
+    headImage:'https://i.loli.net/2021/07/24/YMUpxJRHDNFEvkW.png',
+    nickName:'用户昵称',
+    loginBtnShow:true,
+    selfStockList:[ ],
+  })
+  wx.removeStorageSync('userinfo')
+},
+btnHide(){
+  if(this.data.currentItem != null)
+  this.setData({
+    currentItem:''
+  })
+  // console.log(this.data.currentItem)
+},
+delStretagy(){
+  let that = this;
+  let id = that.data.currentItem;
+  let selfStockList = that.data.selfStockList;
+  let stockId = selfStockList[id].id;
+  wx.showModal({
+    title:'删除自选策略确认框',
+    content:'确定删除当前策略？',
+    success:function(res){
+      if(res.confirm){
+        wx.request({
+          url: 'https://www.zqzqsmile.xyz/stock/login',
+          data:{
+            code:'user_dele_stock_info',
+            id:stockId
+          },
+          method:'POST',
+          header: {
+           'content-type': 'application/json' // 默认值
+          },
+          success:function(res){
+            console.log(res.data)
+            if(res.data.info == '自选股票及策略删除成功'){
+              wx.showToast({
+                title: '策略删除完成',
+                icon: 'none',
+                duration: 2000
+              })
+              selfStockList.splice(id,1)
+              that.setData({
+                selfStockList:selfStockList
+              })
+            }
+            else{
+              wx.showToast({
+                title: '系统异常',
+                icon: 'none',
+                duration: 2000
+              })
+            }
+          }
+        })
+      }
+    }
+  })
+},
+refreshBtn(){
+  let user = wx.getStorageSync('userinfo');
+  let that = this;
+  // console.log(user)
+  if(user == ''){
+    wx.showToast({
+      title: '请先登录/注册！',
+      icon: 'none',
+      duration: 2000
+    })
+  }
+  else{
+    that.setData({
+      loadingShow:true
+    })
+    wx.login({
+      success(res){
+        let id_code = res.code;
+        console.log(id_code)
+        if(id_code){
+          wx.request({
+            url: 'https://www.zqzqsmile.xyz/stock/login',
+            method:'POST',
+            header:{'content-type': 'application/JSON'},
+            data:{
+              code:'user_stock_info',
+              id_code:id_code
+            },
+            success: function(res){
+              console.log(res.data)
+              let selfStockList = res.data
+              that.setData({
+                selfStockList:selfStockList,
+                loadingShow:false
+              })
+            }
+          })
+        }
+      }
+    })
+  }
+},
+touchStart(e) {
+  let that = this;
+  that.setData({
+    touchsx: e.changedTouches[0].clientX,
+    // touchsy: e.changedTouches[0].clientY
+  });
+
+},
+touchEnd(e) {
+  console.log(e)
+  let that = this;
+  let index = e.currentTarget.dataset.index;
+  that.setData({
+    touchex: e.changedTouches[0].clientX,
+    // touchey: e.changedTouches[0].clientY
+  });
+  if(that.data.touchsx-that.data.touchex >= 50){
+    this.setData({
+      currentItem:index
+    })
+  }
+
+},
+
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    let user = wx.getStorageSync('userinfo');
+    let that = this;
+    // console.log(user)
+    if(user == ''){
+      that.setData({
+        selfStockList:'',
+        headImage:'https://i.loli.net/2021/07/24/YMUpxJRHDNFEvkW.png',
+        nickName:'用户昵称',
+      })
+    }
+    else{
+      that.setData({
+        headImage:user.avatarUrl,
+        nickName:user.nickName,
+        loginBtnShow:false,
+        loadingShow:true
+      })
+      wx.login({
+        success(res){
+          let id_code = res.code;
+          console.log(id_code)
+          if(id_code){
+            wx.request({
+              url: 'https://www.zqzqsmile.xyz/stock/login',
+              method:'POST',
+              header:{'content-type': 'application/JSON'},
+              data:{
+                code:'user_stock_info',
+                id_code:id_code
+              },
+              success: function(res){
+                console.log(res.data)
+                let selfStockList = res.data
+                that.setData({
+                  selfStockList:selfStockList,
+                  loadingShow:false
+                })
+              }
+            })
+          }
+        }
+      })
+    }
   },
 
   /**

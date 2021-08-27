@@ -1,2 +1,106 @@
-<view class="items {{current_item === index?'selected':' '}}"  bindtap='clicked'  
-       wx:for="{{choose_items}}" data-key='{{index}}'>{{item}}  </view>
+<!--pages/userPage/userPage.wxml-->
+<view wx:if="{{loadingShow}}">
+    <loading >正在计算交易信号</loading>
+  </view>
+<view class="biggestBox" bindtap="btnHide">
+<view class="titlebox">
+<view class="userbox">
+<view class="userImage">
+<image src="{{headImage}}"></image>
+</view>
+<view class="textbox">
+<view class="nickNameText">{{nickName}}</view>
+<view wx:if="{{loginBtnShow}}" class="loginBtn" bindtap="resgiOrLogin">登录/注册</view>
+<view wx:if="{{!loginBtnShow}}" class="exitBtn" bindtap="exit">退出</view>
+</view>
+</view>
+</view>
+
+<!-- 自选股票列表 -->
+<view class="titleLine">
+<view class="selfStockTitle">
+自选股票
+</view>
+<view class="refreshBox" bindtap="refreshBtn">
+<view class="refreshImage">
+<image src="../images/refresh.png"></image>
+</view>
+<view class="refreshBtn">
+刷新
+</view>
+</view>
+</view>
+<view class="selfStockBox">
+<view class="selfStockListBox" wx:for="{{selfStockList}}" wx:key = 'unique' wx:for-index="index">
+<view class="selfStockList" bindtouchstart='touchStart' bindtouchend="touchEnd" data-index="{{index}}">
+<view class="stockCol">
+<view class="stockTitle">
+股票
+</view>
+<view class="nameCode">
+<view class="name">
+  {{item.st_name}}
+</view>
+<view class="code">
+  {{item.ts_code}}
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+买入策略
+</view>
+<view class="nameCode">
+<view class="name">
+  {{item.purchase_strategy}}
+</view>
+<view class="stretagyDetail">
+<view class="code">
+  {{item.pur_str_p1}}
+</view>
+<view class="detailcode">
+  {{item.pur_str_p2}}
+</view>
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+卖出策略
+</view>
+<view class="stretagyContent">
+<view class="name">
+  {{item.sell_strategy}}
+</view>
+<view class="stretagyDetail">
+<view class="code">
+  {{item.sell_str_p1}}
+</view>
+<view class="detailcode">
+  {{item.sell_str_p2}}
+</view>
+</view>
+</view>
+</view>
+
+<view class="stockCol">
+<view class="stockTitle">
+交易信号
+</view>
+<view class="stretagySignal">
+<view class="tradeAction" style="color:{{item.trade_signal == '卖出'? tradeSignalColor1:tradeSignalColor}};">
+  {{item.trade_signal}}
+</view>
+</view>
+</view>
+
+</view>
+<view class="{{currentItem === index? 'delBtn' : 'delBtn1'}}" data-index="{{index}}"  bindtap="delStretagy">
+删除
+</view>
+
+</view>
+</view>
+</view>

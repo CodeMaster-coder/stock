@@ -107,7 +107,7 @@
   margin-right: 4rpx;
 }
 .stockCol{
-  width: 24.25%;
+  width: 25%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -155,7 +155,7 @@ justify-content: center;
   font-size: 28rpx;
   color: #FB0303;
 }
-.navTriangle{
+/* .navTriangle{
   width: 3.5%;
   display: flex;
   flex-direction: column;
@@ -163,7 +163,7 @@ justify-content: center;
   justify-content: center;
   background-color: rgba(187, 187, 187, 100);
   border-radius: 0 15rpx 15rpx 0;
-}
+} */
 .navTriangle image{
   width: 20rpx;
   height: 20rpx;

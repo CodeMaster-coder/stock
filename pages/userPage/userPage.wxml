@@ -32,7 +32,7 @@
 </view>
 <view class="selfStockBox">
 <view class="selfStockListBox" wx:for="{{selfStockList}}" wx:key = 'unique' wx:for-index="index">
-<view class="selfStockList">
+<view class="selfStockList" bindtouchstart='touchStart' bindtouchend="touchEnd" data-index="{{index}}">
 <view class="stockCol">
 <view class="stockTitle">
 股票
@@ -96,10 +96,6 @@
 </view>
 </view>
 
-<!-- <view class="{{currentItem === index? 'navTriangle1' : 'navTriangle'}}" data-index="{{index}}" bindtap="detailAndDelete"> -->
-<view class="navTriangle" data-index="{{index}}" catchtap="detailAndDelete">
-<image src='/image/箭 头 (1).png'></image>
-</view>
 </view>
 <view class="{{currentItem === index? 'delBtn' : 'delBtn1'}}" data-index="{{index}}"  bindtap="delStretagy">
 删除
